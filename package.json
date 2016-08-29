@@ -1,0 +1,16 @@
+{
+  "name": "element-query",
+  "version": "1.0.0",
+  "description": "Fork of tysonmatanich/elementQuery to work as npm module",
+  "main": "elementQuery.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benmaurer/elementQuery.git"
+  },
+  "author": "Ben Maurer <ben@feith.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benmaurer/elementQuery/issues"
+  },
+  "homepage": "https://github.com/benmaurer/elementQuery#readme"
+}
