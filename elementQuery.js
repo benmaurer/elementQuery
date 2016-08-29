@@ -1,4 +1,8 @@
 ﻿/*! elementQuery | Author: Tyson Matanich (http://matanich.com), 2013 | License: MIT */
+
+/* note: this is the prod version (stored in git as the prod branch) */
+/* small fork removed the window event handlers */
+
 (function (window, document, undefined) {
     // Enable strict mode
     "use strict";
@@ -46,7 +50,6 @@
     };
 
     var updateQueryData = function (data, doUpdate) {
-
         var i, j, k;
         for (i in data) {
             for (j in data[i]) {
@@ -60,6 +63,7 @@
                 }
             }
         }
+
 
         if (doUpdate == true) {
             refresh();
@@ -97,7 +101,7 @@
             var val = trim(value);
             if (val != "") {
                 var cur = clean(element, attr);
-                
+
                 if (cur.indexOf(" " + val + " ") < 0) {
                     // Add the value if its not already there
                     element.setAttribute(attr, trim(cur + val));
@@ -157,7 +161,7 @@
                             }
 
                             /* NOTE: Using offsetWidth/Height so an element can be adjusted when it reaches a specific size.
-                            /* For Nested queries scrollWidth/Height or clientWidth/Height may sometime be desired but are not supported. */
+                             /* For Nested queries scrollWidth/Height or clientWidth/Height may sometime be desired but are not supported. */
 
                             if ((j == "min-width" && element.offsetWidth >= val) ||
                                 (j == "max-width" && element.offsetWidth <= val) ||
@@ -177,6 +181,7 @@
         }
 
         if (!window.addEventListener && window.attachEvent) {
+            console.log('enter FORCE REPAINT');
             // Force a repaint in IE7 and IE8
             var className = document.documentElement.className;
             document.documentElement.className = " " + className;
@@ -186,7 +191,6 @@
 
     // Expose some public functions
     window.elementQuery = function (arg1, arg2) {
-
         if (arg1 && typeof arg1 == "object" && !(arg1.cssRules || arg1.rules)) {
             // Add new selector queries
             updateQueryData(arg1, arg2);
@@ -199,15 +203,9 @@
     //NOTE: For development purposes only! Added stub to prevent errors.
     window.elementQuery.selectors = function () { };
 
-    if (window.addEventListener) {
-        window.addEventListener("resize", refresh, false);
-        window.addEventListener("DOMContentLoaded", refresh, false);
-        window.addEventListener("load", refresh, false);
-    }
-    else if (window.attachEvent) {
-        window.attachEvent("onresize", refresh);
-        window.attachEvent("onload", refresh);
-    }
+    
+    window.elementQuery.refresh = refresh;
+
 }(this, document, undefined));
 
 /*! getEmPixels  | Author: Tyson Matanich (http://matanich.com), 2013 | License: MIT */
